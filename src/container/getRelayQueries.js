@@ -39,7 +39,9 @@ function getRelayQueries(
   let cache = queryCache.get(Component);
   if (!cache) {
     cache = {};
-    queryCache.set(Component, cache);
+    if (typeof window !== 'undefined') { // don't cache on the server
+      queryCache.set(Component, cache);
+    }
   }
   const cacheKey = route.name + ':' + stableStringify(route.params);
   if (cache.hasOwnProperty(cacheKey)) {

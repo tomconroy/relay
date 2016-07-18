@@ -100,7 +100,9 @@ const buildRQL = {
     let node;
     if (!componentCache) {
       componentCache = new Map();
-      queryCache.set(queryBuilder, componentCache);
+      if (typeof window !== 'undefined') { // don't cache on the server
+        queryCache.set(queryBuilder, componentCache);
+      }
     } else {
       node = componentCache.get(Component);
     }
@@ -149,7 +151,9 @@ const buildRQL = {
           }
         }
       }
-      componentCache.set(Component, node);
+      if (typeof window !== 'undefined') { // don't cache on the server
+        componentCache.set(Component, node);
+      }
     }
     if (node) {
       return QueryBuilder.getQuery(node) || undefined;
