@@ -271,6 +271,7 @@ class PendingGraphQLTransaction {
     this._configs = [];
     this._query = query;
     this._variables = variables;
+    this._files = files;
     this._optimisticQuery = optimisticQuery || null;
     this._optimisticResponse = optimisticResponse || null;
     this._collisionKey = collisionKey;
